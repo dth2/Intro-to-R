@@ -1,7 +1,7 @@
 ---
 title: "CSDE Workshop: Introduction to R"
-author: "Jessica Godwin"
-date: "October 6, 2022"
+author: "Deven Hamilton"
+date: "October 17, 2023"
 output: 
  html_document:
    toc: true
@@ -9,17 +9,17 @@ output:
 
 ```{r setup, echo = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_knit$set(root.dir = '~/Dropbox/Workshops/IntroR/')
 ```
 
-# Getting started 
+# Getting started
+
 ## Download R
 
-What is `R`? Open-source, free, stastical computing software.
+What is `R`? Open-source, free, statistical computing software.
 
 Go to the [R website](https://cran.r-project.org/), and download the appropriate software for your operating system.
 
-![](R1.png)
+![](C:/Users/Deven%20Hamilton/My%20Drive/CSDE/workshops/images/R1.png)
 
 ## Download RStudio
 
@@ -27,30 +27,29 @@ What is Rstudio? A nice GUI (graphical user interface) for writing code, analyzi
 
 Go to the [RStudio website](https://rstudio.com/products/rstudio/download/#download). and download the appropriate software for your operating system.
 
-![](Rstudio.png)
+![](C:/Users/Deven%20Hamilton/My%20Drive/CSDE/workshops/images/Rstudio.png)
 
 ## Rstudio Layout
 
-Rstudio has four main panels that allow you to organize your code and have a better user experience developing and using `R` code: 
+Rstudio has four main panels that allow you to organize your code and have a better user experience developing and using `R` code:
 
-  * Source panel: where scripts are edited
-  * Console panel: where code is executed and output is printed
-  * Environment panel: where objects are stored
-  * Files/Plots/Help: navigate files and folders, view plots, read and access help documentation for packages and functions
+-   Source panel: where scripts are edited
+-   Console panel: where code is executed and output is printed
+-   Environment panel: where objects are stored
+-   Files/Plots/Help: navigate files and folders, view plots, read and access help documentation for packages and functions
 
-![](RstudioPanel.png)
-
-
+![](C:/Users/Deven Hamilton/My Drive/CSDE/workshops/images/Rstudiolayout.png)
 
 # R as a calculator
 
 Open a new .R script by clicking File $\rightarrow$ New File $\rightarrow$ R Script. We can execute code by highlighting it in a source file and clicking the run button.\
-![](script.png)
+![](C:/Users/Deven Hamilton/My Drive/CSDE/workshops/images/script.png)
 
-We can also execute code by typing it directly into the console and pressing enter.
-![](Console.png)
+We can also execute code by typing it directly into the console and pressing enter. 
 
-We can do basic mathematical computations using +,-, *, /, and ().\
+![](C:/Users/Deven Hamilton/My Drive/CSDE/workshops/images/Console.png)
+
+We can do basic mathematical computations using +,-, \*, /, and ().\
 
 Note: `pi` is hard coded into `R`.\
 
@@ -65,7 +64,7 @@ pi*1
 
 Try some on your own!\
 
-What about more complicated functions like exsponents, square roots, trig functions and the natural logarithm?\
+What about more complicated functions like exponents, square roots, trig functions and the natural logarithm?\
 
 ```{r, echo = T, eval = T}
 3^2
@@ -79,14 +78,15 @@ exp(6.907755)
 Note: \texttt{log()} computes the natural logarithm. See \texttt{?log} to compute a logarithm with a different base.\
 
 # Documentation
-One convenient feature in \texttt{R} is the documenation for all functions. If you want to learn more about a function and its arguments you can simply type a question mark in front of the function name or use the \texttt{help()} function.
+
+One convenient feature in \texttt{R} is the documentation for all functions. If you want to learn more about a function and its arguments you can simply type a question mark in front of the function name or use the \texttt{help()} function.
+
 ```{r, echo = T, eval = F}
 ?log
 help("log")
 ```
 
-**Question**
-According to the above help files, what function (or functions) would you need to use for a base 10 logarithm?
+**Question** According to the above help files, what function (or functions) would you need to use for a base 10 logarithm?
 
 There are a few other functions that can help you understand how to use functions or recall their arguments.
 
@@ -96,16 +96,18 @@ args(log)
 ```
 
 # Objects in R
-Numbers, formulas, and other statistical information can be stored as objects in R.  \
 
-Objects are given names and then are stored in the working environment. Once they are stored, the information remainds "hidden" until referenced again. If you are using RStudio the object names can be seen in the Environment module.\
+R is an object oriented programming language. Numbers, formulas, functions and other statistical information are stored as objects in R.\
+
+Objects are given names and then are stored in the working environment. Once they are stored, the information remains "hidden" until referenced again. If you are using RStudio the object names can be seen in the Environment module.\
 
 Notes:
 
-  *  Object names are case-sensitive
-  *  Object names should be meaningful and short (``best practice'')
-  *  `<-` is most common, but `=` is acceptable
+-   Object names are case-sensitive
+-   Object names should be meaningful and short (\`\`best practice'')
+-   `<-` is most common, but `=` is acceptable
 
+All R objects are given a class. The class of the object governs how it interacts with other objects.
 
 ```{r, eval = T, echo = T}
 x <- 2 #Creates the object "x"
@@ -118,130 +120,144 @@ h <- "practice"   #You can also put strings in an object
 h
 ```
 
-Objects can be numbers, strings, matrices, or even more complicated `R` objects.\
 Examples of `R` object types:
 
-  *  the computing basics: integer, numeric, vector, matrix, list
-  *  data.frame
-  *  factor
-  *  lm object (linear model object)
-  *  formula
+-   data: logical, numeric, integer, complex, character, raw
+-   data structures: atomic, vector, matrix, list, data.frame
+-   formula
+-   function
 
+## Data types
+The most atomic object in R will exist having one of those data types, described below. An atomic object of the data type can have a value, `NA` which represents an observation with no data (e.g., a missing measurement), or `NULL` which isn't really a value at all, but can still have the data type class.
 
-There are handy functions for seeing whether or not an object is of a certain type. These functions are usually important for debugging and making sure you are inputing the proper object type into a function argument.
+You will encounter other data types, such as `Date` or `POSIXct` if you are working with dates or time stamps. These other data types are extensions of the fundamental data types.
 
-```{r, echo = T, eval = T}
-is.integer(y)
-is.numeric(y)
-is.character(h)
-is.matrix(x)
-```
-
-The function \texttt{ls()} will list all of the objects that have been created:
-```{r, echo = T, eval = T}
-ls()
-```
-
-Here we see we have in our environment the objects we created \texttt{x, y, h}. If we assign a new value to \texttt{x} it will overwrite what is already stored in that object
+To determine what data type an object is, use `is(obj)`, `str(obj)`, or `class(obj)`.
 
 ```{r}
-x     #Original object that we created above.
-x <- 7  #New object with same name
-x     #New object
+print(is("a"))
+
+print(str(TRUE))
+
+print(class(123.45))
+
+print(class(as.integer(1000)))
+
+n <- as.numeric(999999999999999999999)
+
+print(class(n))
 ```
 
-# R Markdown
+### Logical
 
-Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>. RMarkdown is a nice program within RStudio that allows us to typset documents and incorporate code and output. This is helpful for writing labs for you all to follow along with, but also to create reproducible and replicable research. It allows you to avoid writing scripts to produce all your output and then copy and pasting that output into a word processing software which may induce unnecessary errors in your work.
-
-Go to File $\rightarrow$ New File $\rightarrow$ R Markdown. Select `Knit to HTML`
-
-![](KnitToHtml.png)
-
-It will open up a new template .Rmd file for you to begin editing that will look like this:\
-
-![](NewRmd.png)
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+Use `logical` values for characteristics that are either `TRUE` or `FALSE`. Note that if `logical` elements can also have an `NA` value if the observation is missing. In the following examples,
 
 ```{r}
-data(cars)
-summary(cars)
+# evaluate as logical, test whether 1 is greater than two
+a <- 1 > 2
 ```
 
+```{r}
+# create two numerical values, one being NA, representing ages
+age_john <- 39
+age_jane <- NA
 
-A handy Rstudio/R Markdown cheatsheet can be found here <https://rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf>. It gives summaries of the most used Markdown syntax aspects (e.g. headings/subheadings, bullet lists, numbered lists), the types of files R Markdown can create and examples of how R and R Markdown interact.
-
-This is an example of an an R Markdown file that will be used to create a .html file. This is the best option if you don't have much math to write or do not need to share a .pdf.
-
-## Why use R Markdown?
-
-* Reproducibility: the results in the final come directly from the code include in the file
-* Replicability: a collaborator or another researcher or student can directly replicate your analysis using the code in the chunks and there is room for much more commentary than in a regular script file.
-* Debugging: every time you knit a .Rmd file, it executes the code from start to finish in a clean environment. it will not compile if there are errors in the \tt{R} code, the Markdown syntax or, if we are making a .pdf, the \LaTeX code.
-
-## Chunks
-
-While not nicely named, R code can be included in an R Markdown file in what we call a "chunk". Properties of the chunk are adjusted within the curly braces. The cheatsheet under the heading "Embed code with knitr syntax". The most common arguments I use are
-
-
-
-  *  `echo`: logical argument determining whether the code in the subsequent chunk will be printed in the document created
-  *  `eval`: logical argument determining whether or not the code in the subsequent chunk will be evaluated by `{R}$ or just printed in the document.
-  *  `fig.cap`: provides a caption for a figure
-  *  `fig.align`: aligns figure on "left", "right" or "center"
-
-
-
-```{r pressure, echo=FALSE, fig.align = 'center', fig.cap = "For example, this figure was created with `echo = FALSE` and `eval = TRUE`."}
-plot(pressure)
+# logical NA from Jane's undefined age
+(jo <- age_john > 50)
+(ja <- age_jane > 50)
 ```
 
-Chunks allow you to break up your code into smaller pieces that a reader can understand. It's great for writing reports/homeworks so that you can include code immediately followed by its output.\
+Logical values are often expressed in binary format as 0 = `FALSE` and 1 =`TRUE\`. In R these values are interconvertible. Other software (e.g., Excel, MS Access) may convert logical values to numbers that you do not expect.
 
-## `purl()`
-
-You can use the function `purl()` on a .Rmd document and it will create a new `.R` file with only the R code in the chunks. Copy and paste the following code line by line into your document to create a document called `IntroToR_20221006.R` containing only the `R` code in this document.
-
-```{r, eval = F}
-install.packages('knitr', dependencies = T)
-library(knitr)
-purl('IntroToR_20221006.Rmd')
+```{r}
+(t <- as.logical(1))
+(f <- as.logical(0))
 ```
 
-## Formatting
+### Numeric
 
-All of this is available on the cheat sheet, but here we will briefly cover basic text and document formatting.
+`Numeric` values are numbers with range about 2e-308 to 2e+308, depending on the computer you are using. You can see the possible range by entering `.Machine` at the R console. These can also include decimals. For more information, see [Double-precision floating-point format](https://en.wikipedia.org/wiki/Double-precision_floating-point_format)
 
-### Bold/Italics
-Use asterisks (`*`) around a word or phrase to make it *italicized*.
+### Integer
 
-Use double asterisks (`**`) around a word or phrase to make it **bold**.
+`Integer` values are numerical, but can only take on whole, rather than fractional values, and have a truncated range compared to `numeric`. For example, see below, if we try to create an integer that is out of range. The object we created is an integer, but because it is out of range, is value is set to `NA`.
 
-In R Markdown, these formatting tools will create highlighted text.
+```{r}
+i <- as.integer(999999999999999999999)
 
-### Math mode
+print(class(i))
+```
 
-If you want to write equations you can use (`\$`) like in \LaTeX.
+### Complex
 
-Wrap an equation in a single `\$` to write an equation in "math mode": $y = x$.
+The `complex` type is used in mathematics and you are unlikely to use it in applied social science research unless you get into some heavy statistics. See [Complex number](https://en.wikipedia.org/wiki/Complex_number) for a full treatment.
 
-Wrap an equation in double dollar signs (`\$\$`) to make an equation block in math mode: $$ y = x $$.
+### Character
 
-In a .pdf file you can also include raw \LaTeX code, and use and equation or align environment:
+`Character` data include the full set of keys on your keyboard that print out a character, typically [A-Z], [a-z], [0-9], punctuation, etc. The full set of ASCII characters is supported, e.g. the `accent aigu` in CafÃ©:
 
-\begin{equation}
-y = x.
-\end{equation}
+```{r}
+print(class("CafÃ©"))
+```
+
+Also numbers can function as characters. Be careful in converting between numerical and character versions. For example, see these ZIP codes:
+
+```{r error=TRUE}
+# this is a character
+my_zip <- "98115"
+
+# it is not numeric.
+my_zip + 2
+```
+
+```{r}
+# we can convert it to numeric, although it would be silly to do with ZIP codes, which are nominal values
+as.numeric(my_zip) + 2
+
+# Boston has ZIP codes starting with zeros
+boston_zip <- "02134"
+as.numeric(boston_zip)
+```
+
+### Raw
+
+`Raw` values are used to store raw bytes in hexadecimal format. You are unlikely to use it in applied social science research. For example, the hexadecimal value for the character `z` is `7a`:
+
+```{r}
+print(charToRaw("z"))
+
+class(charToRaw("z"))
+```
+
+## R data structures {#rdatastructures}
+
+There are 5 basic data structures in R, as shown in the graphic:
+
+1.  vector
+2.  matrix
+3.  array
+4.  data frame
+5.  list
+
+![](C:/Users/Deven Hamilton/My Drive/CSDE/workshops/images/data_structures.png)
 
 
-# Vectors in `R`
+In addition, the `factor` data type is very important
 
-Vectors are a specific type of object (in the first lab we discussed object types of integer, numeric, character and logical) with dimension $n\times1$, e.g. a place to store $n$ observations of a single variable. Vector elements are indexed by positive integers.  Many mathematical functions in `R` are "vectorized", i.e. we can perform operations on every element of a vector at the same time (e.g. add 3 to each element of a vector.) Other functions can aggregate members of the vector (e.g. give the mean of the vector.)\
+### Vector
 
-### `rep()`
+A vector is an ordered set of elements of one or more elements of the same data type and are created using the `c()` constructor function. For example, a single value is a vector:
+
+```{r}
+# create a vector of length 1
+a <- 1
+is(a)
+```
+
+#### rep()
 
 We can create a vector with repeated numbers.
+
 ```{r}
 help(rep)
 
@@ -255,8 +271,10 @@ t <- rep(c(1,2), c(5, 5))
 t
 ```
 
-### `seq()`
+#### seq()
+
 We can create a vector with a sequence of numbers.
+
 ```{r}
 help(seq)
 
@@ -276,141 +294,100 @@ e <- seq(0, 15, 3)
 e
 ```
 
-
-### `c()`
-To create a vector with specific numbers or objects inside, we need to use the c() function:
-```{r, echo = T, eval = F}
-f <- (0, 5, 10)  #This doesn't work
-```
-```{r}
-f <- c(0, 5, 10) #This works!!!
-f
-```
-
-### `rnorm()`
-We can also create a vector from randomly generated numbers. Let's draw 10 random numbers drawn from the standard normal distribution (mean of 0, standard deviation of 1). Note: you can draw from any normal distribution of your choosing by changing the `mean=} and `sd=} arguments.
-```{r}
-g <- rnorm(10, mean=0, sd=1)
-g
-```
-
-Sometimes you will want to clear every object you've stored in your environment. This is done using the `rm()` function.
+If you try creating a vector with mixed data types, you may get unexpected results; mixing character elements with other type elements will result in character representations, e.g.,
 
 ```{r}
-rm(list=ls())
+c(1, "a", TRUE, charToRaw("z"))
 ```
 
-## Subsetting Vectors
-
-Sometimes we will need to access only certain elements of a vector. Let's create a new vector `x` that we will work with to subset:
+Results will depend on the data type you are mixing, for example because logical values can be expressed numerically, the `TRUE` and `FALSE` values are converted to `1` and `0`, respectively.
 
 ```{r}
-x <- seq(60, 70, 1)
-x
+(c(1:3, TRUE, FALSE))
 ```
 
-Often subsetting in `R` involves using brackets [ ].
-```{r}
-x[1]
-x[2]
-```
-
-**Question**
-
-What will the following code do?
-```{r, eval= F, echo = T}
-x[c(1, 3)]
-x[c(2, 3, 6)]
-x[c(6, 3, 2)]
-```
-
-Often we will use Boolean logical operators in subsetting.
-
-Some operators:
-
- * == : equal to
- * $\leq$ : less than
- * $\geq$ : greater than
- * \&, \&\& : and
- * $\vert$, $\vert \vert$ : or
-
+But if a character is added, all elements are converted to characters.
 
 ```{r}
-x<60
-x<65
+c(1:3, TRUE, FALSE, "awesome!")
 ```
 
-Note: without using [ ], `R` simply returns a vector of class logical containing elements of either `TRUE` or `FALSE`.
+Order is important, i.e.,
+
+`1, 2, 3` is not the same as `1, 3, 2`
+
+R will maintain the order of elements in vectors unless a process is initiated that changes the order of those elements:
 
 ```{r}
-x[x < 65]
-x > 60 & x < 65
-x[x > 60 & x < 65]
-x[x < 60 | x > 65]
-x[x == 60]
+# a vector 
+(v <- c(1, 3, 2))
+
+(sort(v))
 ```
 
-## Some more helpful vector functions
-
-Finding the length of a vector.
+You can get some information about vectors, such as length and data type:
 
 ```{r}
-n = length(x)
-n    
+# create a random normal 
+set.seed(5)
+normvec100 <- rnorm(n = 100)
+
+length(normvec100)
+class(normvec100)
+class(normvec100 > 1)
 ```
 
-What would the following code do?
-```{r, eval = F}
-x[1:length(x)]
-x[3:length(x)]
-
-x[1:n]
-x[3:n]
-```
-
-Is an object a vector?
+Elements of vectors are specified with their index number (1 .. n):
 
 ```{r}
-is.vector(x)
+v <- seq(from = 0, to = 10, by = 2)
+v[4]
 ```
 
-Let's convert an object to a vector. Note: for every class of object that has an "is" function, there is also an "as" function.
+The index number can extracted based on a specific criteria and used to designate elements in the vector you want to change
 
 ```{r}
-vec.x2<-as.vector(x)
-is.vector(vec.x2)
+v <- seq(from = 0, to = 10, by = 2)
+v
+
+which(v > 5)
+
+v[which(v > 5)] <- 100
+v
+
 ```
 
 Many of `R`'s statistics functions take vectors as arguments.
 
 ```{r}
-mean(x)
-sd(x)
+mean(v)
+sd(v)
 ```
 
-# Matrices in `R`
-There are many ways to use the `matrix()` function to create a matrix.
+### Matrix
+
+A matrix is like a vector, in that it can contain only one data type, but it is two-dimensional, having rows and columns. There are many ways to use the `matrix()` function to create a matrix.
 
 ```{r}
-?matrix
-x <- matrix(1:12, nrow=3)
-x
+# make a vector 1 to 100
+(v <- 1:100)
+
+# load to a matrix
+(m1 <- matrix(v, ncol = 10, byrow = TRUE))
+
+# different r, c ordering
+(m2 <- matrix(v, ncol = 10, byrow = FALSE))
 ```
 
-Alternatively:
+If you try to force a vector into a matrix whose row $\times$ col length does not match the length of the vector, the elements will be recycled, which may not be what you want. At least R will give you a warning.
+
 ```{r}
-y <- matrix(1:12, ncol=4)
-y
+(m3 <- matrix(letters, ncol = 10, nrow = 10))
 ```
 
-Alternatively, we can coerce a vector into a matrix:
-```{r}
-z <- 1:10
-matrix.z <- matrix(z, ncol=5)
-matrix.z
-```
 
 Let's create a matrix of zeroes and add 1's to the diagonal.
+
 ```{r}
 matrix.zero <- matrix(0, nrow=5, ncol=5)
 matrix.zero
@@ -422,10 +399,10 @@ matrix.zero
 Similarly to finding the length of a vector, we often want to find the dimensions of a matrix
 
 ```{r}
-dim(x)
+dim(matrix.zero)
 ```
 
-## Subsetting a matrix
+#### Subsetting a matrix
 
 To isolate or look at parts of a matrix we will still use brackets [ ], but now we have two dimensions.
 
@@ -454,7 +431,7 @@ matrix.z[c(1,5), ]
 matrix.z[ , 1] = 0
 matrix.z
 
-#Change all of column 3 to 50
+#Change all of row 3 to 50
 matrix.z[3, ] = 50
 matrix.z
 
@@ -463,7 +440,7 @@ matrix.z[1, 4] = 999
 matrix.z
 ```
 
-We can also create a new matrix by combining columns or rows from a pre-existing matrix.  The command cbind combines columns, and the command rbind combines rows.\
+We can also create a new matrix by combining columns or rows from a pre-existing matrix. The command cbind combines columns, and the command rbind combines rows.\
 
 Note: You need to have the same number of columns to use cbind, and rows to use rbind.
 
@@ -494,7 +471,7 @@ matrix.row <- rbind(matrix.a[c(5),],
 matrix.row
 ```
 
-## Mathematical operations using matrices
+#### Mathematical operations using matrices
 
 First we will go over addition and subtraction. Recall, we can only add and subtract matrices with the same number of dimensions.
 
@@ -509,14 +486,15 @@ matrix.a - matrix.b
 matrix.b - matrix.a
 matrix.a + matrix.b
 ```
-### Matrix multiplication
-To multiply matrices we need the left matrix to have the same number of columns as the number of rows in the right matrix. Instead of \* we use \%*\% to multiply matrices.\
+
+#### Matrix multiplication
+
+To multiply matrices we need the left matrix to have the same number of columns as the number of rows in the right matrix. Instead of \* we use %\*% to multiply matrices.\
 
 Take note of what happens when we try to do the following operations:
 
- * $CD$: `matrix.c \%*\% matrix.d`
- * $DC$: `matrix.d \%*\% matrix.c`
-
+-   $CD$: `matrix.c \%*\% matrix.d`
+-   $DC$: `matrix.d \%*\% matrix.c`
 
 ```{r}
 matrix.c <- matrix(3, ncol=4, nrow=5)
@@ -529,6 +507,7 @@ matrix.d
 
 dim(matrix.d)
 ```
+
 ```{r, eval = F}
 
 matrix.c %*% matrix.d 
@@ -536,237 +515,296 @@ matrix.c %*% matrix.d
 matrix.d %*% matrix.c
 ```
 
-# Practice 1: Vectors \& Matrices
+##### Practice 1: Vectors & Matrices
 
-  *  Create a vector with the numbers 0-20 sequenced by 5.  What is the length of the vector? 
-  *  Create a vector that draws 20 random numbers from a normal distribution with a mean of 0 and a standard deviation of 1. Is the mean of this vector zero?
-  *  Create a matrix that includes the numbers 1-6, with the following dimensions: $2 \times 3$.  What number is in the first row, second column?
-  *  Create another matrix (give it a different name) that includes the numbers 1-6 with the following dimensions: $3 \times 2$
-  *  Before multiplying these matrices in R, multiply these matrices by hand on paper.  What will be the dimensions of the results matrix?  
-  *  Use R to multiply the matrices that you created in a) and b) and check your results.  
+-   Create a vector with the numbers 0-20 sequenced by 5. What is the length of the vector?
+-   Create a vector that draws 20 random numbers from a normal distribution with a mean of 0 and a standard deviation of 1. Is the mean of this vector zero?
+-   Create a matrix that includes the numbers 1-6, with the following dimensions: $2 \times 3$. What number is in the first row, second column?
+-   Create another matrix (give it a different name) that includes the numbers 1-6 with the following dimensions: $3 \times 2$
+-   Use R to multiply the matrices that you created in a) and b) and check your results.
 
-# Reading and Writing Files
+### Array
 
-## The Working Directory
-To open files in `R` we need to specify the directory our datafiles are stored in. There are two ways to do this: using code or via the dropdown menus (this will vary by Windows or Mac).
-
-```{r, eval = F}
-setwd("~/Dropbox/Workshops/IntroR/")
-```
-
-To set the working directory in your .Rmd document, you will need to include the following line of code:
-```{r, eval = F}
-knitr::opts_knit$set(root.dir = "~/Dropbox/Workshops/IntroR/")
-```
-
-There are many ways to read in files to `R`, depending on the file type.
-
-## Read and Write .csv
-
-```{r read_csv} 
-?read.csv
-data <- read.csv("Seattle_Pet_Licenses.csv")
-write.csv(data, file = 'Seattle_Pets_copy.csv',
-          row.names = F)
-```
-
-## Read and write R data files, .rda
-
-```{r save_rda}
-data_copy <- data
-names(data_copy)
-
-## Remove periods from names
-## The \\ is called an "escape"
-## So that R recognizes the period
-names(data_copy) <- gsub("\\.", "", names(data_copy))
-save(data_copy, file = 'SeattlePets.rda') 
-rm(data_copy) 
-```
-
-What is the name of the data set that loaded by the line of code below?
-
-```{r load_rda}
-load('SeattlePets.rda') 
-```
-
-## Stata files, .dta
-
-To load Stata data files we either need to use the package `foreign` or `haven`.
-```{r read_haven}
-library(haven)
-write_dta(data_copy, path = "SeattlePets.dta") #Save as a stata data frame
-rm(data_copy)
-
-data_copy <- read_dta(file = "SeattlePets.dta")
-```
-
-Recall if you have not installed the `haven` package you can do so using the following line of code.
-```{r, eval = F}
-install.packages("haven", dependencies = T)
-```
-
-## Other file types
-
-Try Google-ing! Chances are there's a package for the file type of your choice. I've loaded ASCII files, .txt, .xls, .xlsx files among others.
-
-# `data.frame` and `tibble`
-
-A `data.frame` is a type of `R` object used for storing vectors of information who are of different classes, i.e. one column can be numeric, another can be a character, another can be a factor. The `tibble` is a newer object class akin to a `data.frame` in the `tidyverse`. Both are actually special classes of `list`s.
-
-Let's go through some commands for exploring and viewing data frames.
-
-Test whether an object is a `data.frame` object or a `tibble` object.
+An array is similar to matrix, but it can have more than one dimension. These can be useful for analyzing time series data or other multidimensional data. A simple example of creating and viewing the contents of an array:
 
 ```{r}
-is.data.frame(data)  
-is.data.frame(data_copy)
-rm(data_copy)
+# a vector 1 to 27
+v <- 1:27
 
-library(tidyr)
-library(dplyr)
-data_tib <- as_tibble(data)
+# create an array, 3 x 3 x 3
+(a <- array(v, dim = c(3, 3, 3)))
+
+# array index is r, c, m (row, column, matrix), e.g., row 1 column 2 matrix 3:
+(a[1,2,3])
 ```
 
-View first 6 rows.
-```{r head}
-head(data)
-head(data_tib)
-```
+### List
 
-View variable names.
+R lists are ordered collections of objects that do not need to be of the same data type. Those objects can be single-value vectors, multiple-value vectors, matrices, data frames, other lists, etc. Because of this, lists are a very flexible data type. But because they can have as little or as much structure as you want, can become difficult to manage and analyze.
+
+Here is an example of a list comprised of single value vectors of different data type. Compare this with the attempt to make a vector comprised of elements of different data type:
+
 ```{r}
-# VARIABLE NAMES
-names(data)
-colnames(data)
-```
-View row names, which default to row numbers.
-```{r, eval = F}
-rownames(data)
+(l <- list("a", 1, TRUE))
 ```
 
-Find dimensions.
+Let's modify that list a bit:
+
 ```{r}
-dim(data) # this gives rows and then columns (n X p)
-nrow(data)
-ncol(data)
-length(data) # NOT ADVISED TO USE WITH MATRICES OR DATA FRAMES
+(l <- list("a", 
+           1:20, 
+           as.logical(c(0,1,1,0))))
 ```
+
+The top-level indexing for a list is denoted using two sets of square brackets. For example, the first element of our list can be accessed by `l[[1]]`. For example, the mean of element 2 is obtained by `mean(l[[2]])`: `r mean(l[[2]])`.
+
+To perform operations on all elements of a list, use `lapply()`:
+
+```{r}
+# show the data types
+(lapply(X = l, FUN = class))
+
+# mean, maybe?
+(lapply(X = l, FUN = function(x) {mean(x)}))
+```
+
+### Factor
+
+Factors are similar to vectors, in that they are one-dimensional ordered sets. However, factors also use informational labels. For example, you may have a variable with household income as a text value:
+
+-   "\<\$10,000"
+-   "\$10,000-\$549,999"
+-   "\$50,000-\$99,999"
+-   "\$100,000-\$200,000"
+-   "\>\$200,000"
+
+As a vector:
+
+```{r}
+(income <- c("<$10,000"
+, "$10,000-$49,999"
+, "$50,000-$99,999"
+, "$100,000-$200,000"
+, ">$200,000"))
+```
+
+Because these are characters, they do not sort in proper numeric order:
+
+```{r}
+sort(income)
+```
+
+If these are treated as a factor, the levels can be set for proper ordering:
+
+```{r}
+# create a factor from income and set the levels
+(income_factor <- factor(x = income, levels = income))
+
+# sort again
+(sort(income_factor))
+```
+
+### Data frame
+Other than vectors, data frames are probably the most used data type in R. You can think of data frames as matrices that allow columns with different data type. For example, you might have a data set that represents subject IDs as characters, sex or gender as text, height, weight, and age as numerical values, income as a factor, and smoking status as logical. Because a matrix requires only one data type, it would not be possible to store all of these as a matrix. An example:
+
+```{r}
+# income levels 
+inc <- c("<$10,000"
+, "$10,000-$49,999"
+, "$50,000-$99,999"
+, "$100,000-$200,000"
+, ">$200,000")
+
+BMI <-  data.frame(
+   sid = c("A1001", "A1002", "B1001"),
+   gender = c("Male", "Male","Female"), 
+   height_cm = c(152, 171.5, 165), 
+   weight_kg = c(81, 93, 78),
+   age_y = c(42, 38, 26),
+   income = factor(c("$50,000-$99,999", "$100,000-$200,000", "<$10,000"), levels = inc)
+)
+print(BMI)
+```
+## The environment
+
+The function \texttt{ls()} will list all of the objects that have been created:
+
+```{r, echo = T, eval = T}
+ls()
+```
+
+Here we see we have in our environment the objects we created \texttt{x, y, h}. If we assign a new value to \texttt{x} it will overwrite what is already stored in that object
+
+```{r}
+x     #Original object that we created above.
+x <- 7  #New object with same name
+x     #New object
+```
+
+Sometimes you will want to clear every object you've stored in your environment. This is done using the `rm()` function.
+
+```{r}
+rm(list=ls())
+```
+
 
 # Data Manipulation
-Like we did with vectors and matrices, we may want to select or view partial data frames.
 
+Like we did with vectors and matrices, we may want to select or view partial data frames.
 
 Whether you go down the base `R` or `tidyr`/`dplyr` path is up to you, but I want you to have some familiarity with both.
 
+-   Vignette base `R` vs `tidyverse`: \url{https://tavareshugo.github.io/data_carpentry_extras/base-r_tidyverse_equivalents/base-r_tidyverse_equivalents.html}
+-   `tidyr`, `dplyr` cheat sheet: <https://rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf>
 
-  * Vignette base `R` vs `tidyverse`: \url{https://tavareshugo.github.io/data_carpentry_extras/base-r_tidyverse_equivalents/base-r_tidyverse_equivalents.html}
-  * `tidyr`, `dplyr` cheat sheet: https://rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf
+The most common dplyr functions:
+
+ - select(): subset columns
+ - filter(): subset rows on conditions
+ - mutate(): create new columns by using information from other columns
+ - group_by() and summarize(): create summary statistics on grouped data
+ - arrange(): sort results
+ - count(): count discrete values
+
+### load in some data to manipulate
+
+```{r}
+library(palmerpenguins)
+summary(penguins)
+```
 
 ### Selecting variables
 
 In base `R`, we select a column in one of two ways
-```{r, echo = T, eval = F}
-data$Species
-data[ , c("Species")]
-```
-
-In the Hadleyverse we use the `select` function:
 
 ```{r, echo = T, eval = F}
-select(data, Species)
+penguins$species
+penguins[ , c("species")]
 ```
+
+In the Hadleyverse or tidyverse we use the `select` function:
+
+```{r, echo = T, eval = F}
+select(penguins, species)
+```
+
 ### Subsetting data
-In base `R`, we subset data using Boolean logic tests. Here is a new `data.frame` of all the observations whose species is ``Cat''.
+
+In base `R`, we subset data using Boolean logic tests. Here is a new `data.frame` of all the observations whose species is \`\`Gentoo''.
 
 ```{r, echo = T, eval = T}
-head(data)
-table(data$Species)
+head(penguins)
+table(penguins$species)
 
-cat.base <- data[data$Species == "Cat", ]
-dim(cat.base)
-head(cat.base)
+Gentoo.base <- penguins[penguins$species == "Gentoo", ]
+dim(Gentoo.base)
+head(Gentoo.base)
 ```
 
 In the Hadleyverse one would use the `filter` function.
 
 ```{r, echo = T, eval = F}
-cat.tidy <- filter(data, Species == "Cat")
-dim(cat.tidy)
-head(cat.tidy)
+Gentoo.tidy <- filter(penguins, species == "Gentoo")
+dim(Gentoo.tidy)
+head(Gentoo.tidy)
 ```
 
-We can also use what is called ``the pipeline'' to do the same operation: 
+We can also use what is called \`\`the pipeline'' to do the same operation.
+The piple can be read as "and then"
+
+
 ```{r, echo = T, eval = F}
-cat.tidy2 <- data %>% filter(Species == "Cat" )
-dim(cat.tidy2)
-head(cat.tidy2)
+Gentoo.tidy2 <- penguins %>% filter(species == "Gentoo" )
+dim(Gentoo.tidy2)
+head(Gentoo.tidy2)
 ```
 
-or to do multiple sequential operations. 
+or to do multiple sequential operations.
 
 Note: you must link the sequential functions by `%>%`. To make your code clean you probably want to use multiple lines, but the `%>%` must come at the end of a line or `R` will end your operation. What happens if you run this chunk of code?
+
 ```{r, echo = T, eval = F}
-data %>% filter(Species == "Cat" ) %>%
-  select(Species)
+penguins %>% filter(species == "Gentoo" ) %>%
+  select(species)
 
-data %>% filter(Species == "Cat" ) %>%
-  select(Species)
 ```
-
 
 ### Making a new variable
 
 ```{r, echo = T, eval = T}
-caf.data <- read.csv("caffeine.csv", header = T)
-head(data)
-caf.data$CaffKg <- caf.data$Caffeine/1000
+
+head(penguins)
+penguins$bill_length_cm <- penguins$bill_length_mm * 10
 ```
 
 ```{r, echo = T, eval = F}
 # dplyr
-caf.dplyr <- mutate(caf.data,
-                     CaffKg = Caffeine/1000)
-head(caf.dplyr)
+penguins <- mutate(penguins,
+                     bill_depth_cm = bill_depth_mm * 10)
 
-caf.dplyr <- caf.dplyr %>% 
-  mutate(CaffKg = Caffeine/1000)
+head(penguins)
+
+
 
 ```
 
 ### Summary statistics
 
+
+The `summary()` function will summarize variables in a data set, based on their class.
+
+```{r}
+summary(penguins)
+
+min(penguins$bill_depth_cm)
+
+min(penguins$bill_depth_cm, na.rm = TRUE)
+max(penguins$bill_depth_cm, na.rm = TRUE)
+mean(penguins$bill_depth_cm, na.rm = TRUE)
+sd(penguins$bill_depth_cm, na.rm = TRUE)
+median(penguins$bill_depth_cm, na.rm = TRUE)
+
+quantile(penguins$bill_depth_cm,0.5, na.rm = TRUE)
+quantile(penguins$bill_depth_cm,0.25, na.rm = TRUE)
+quantile(penguins$bill_depth_cm,0.75, na.rm = TRUE)
+quantile(penguins$bill_depth_cm,c(0.25,0.5,0.75), na.rm = TRUE)
+```
+
+You can also use the tidyverse to selects collections of summary statistics.
+
 ```{r, echo = T, eval = T}
-caf.sum.base <- data.frame(CaffMean = mean(caf.data$Caffeine),
-                           CaffSd = sd(caf.data$Caffeine))
-head(caf.sum.base)
+P.base <- data.frame(BillMean = mean(penguins$bill_length_mm,na.rm=TRUE),
+                           BillSd = sd(penguins$bill_length_mm,na.rm=TRUE))
+head(P.base)
 
 # Use the "aggregate" function
 ## Column names might have to be changed afterwards
-caf.sum.base <- aggregate(formula = 
-                            Caffeine ~ 1, 
-                           data = caf.data,
-                           FUN = function(x) c(mean = mean(x), sd = sd(x)))
-head(caf.sum.base)
-```
-```{r, echo = T ,eval =F}
-caf.sum.dplyr <- summarise(caf, 
-                            CaffMean = mean(Caffeine),
-                            CaffSD  = sd(Caffeine))
-head(caf.sum.dplyr)
+P.base <- aggregate(x = bill_length_mm ~ 1, 
+                           data = penguins,
+                           FUN = function(x) c(mean = mean(x,na.rm=TRUE), sd = sd(x,na.rm=TRUE)))
 
-caf.sum.dplyr <- summarise_at(caf, 
-                               .vars = c("Caffeine"), 
-                               .funs = c("mean", "sd"))
-names(caf.sum.dplyr)
+P.base
+```
+
+```{r, echo = T ,eval =F}
+P.dplyr <- summarise(penguins, 
+                            BillMean = mean(bill_length_mm,na.rm=TRUE),
+                            BillSD  = sd(bill_length_mm,na.rm=TRUE))
+head(P.dplyr)
+
+P.dplyr <- summarise_at(penguins, 
+                               .vars = c("bill_length_mm"), 
+                               .funs = c("mean", "sd"),na.rm=TRUE)
+P.dplyr
 ```
 
 ### Summary statistics by group
 
 In many cases it's inconsequential whether you use base `R` or the `tidyverse`. Often `tidyr` and `dplyr` functions are a bit faster than `R`, but I find the `summarise`function in the `tidyverse` to be MUCH, MUCH slower than `aggregate` in base `R`.
+
 ```{r, echo = T, eval = T}
 data(mtcars)
-mtcars.sum.by <- aggregate(formula = cbind(mpg, wt) ~ cyl + gear, 
+mtcars.sum.by <- aggregate(x = cbind(mpg, wt) ~ cyl + gear, 
           data = mtcars, 
           FUN = function(x){
             c(mean = mean(x), sd = sd(x))
@@ -775,13 +813,14 @@ mtcars.sum.by <- aggregate(formula = cbind(mpg, wt) ~ cyl + gear,
 mtcars.sum.by
 
 mtcars$total <- 1
-mtcars.sum.by2 <- aggregate(formula = total ~ cyl + gear, 
+mtcars.sum.by2 <- aggregate(x = total ~ cyl + gear, 
           data = mtcars, 
           FUN = sum, drop = T)
 mtcars.sum.by2
 table(mtcars$cyl, mtcars$gear)
 
 ```
+
 ```{r, echo = T, eval = F}
 mtcars.sum.dplyr <- mtcars %>% 
   group_by(cyl, gear) %>% 
@@ -794,363 +833,198 @@ mtcars.sum.dplyr <- mtcars %>%
 mtcars.sum.dplyr
 ```
 
-### `summary()`
-The `summary()` function will summarize variables in a data set, based on their class.
 
-```{r}
-summary(data)
+### Practice: Data manipulation
 
-min(caf.data$Caffeine)
-max(caf.data$Caffeine)
-mean(caf.data$Caffeine)
-sd(caf.data$Caffeine)
-var(caf.data$Caffeine)
-sqrt(var(caf.data$Caffeine)) # same as the sd
-median(caf.data$Caffeine)
+1.  What is the mean bill length and depth in the penguins dataset?
+2.  If 50mm is long, how many long-billed penguins are in the penguins dataset?
+3.  Create a new variable in the dataset to represent the ratio of bill length to depth.
 
-quantile(caf.data$Caffeine,0.5)
-quantile(caf.data$Caffeine,0.25)
-quantile(caf.data$Caffeine,0.75)
-quantile(caf.data$Caffeine,c(0.25,0.5,0.75))
-```
+## Functions {#rfunc}
 
-# Plotting in R
+Functions are sets of statements in R that are grouped together to perform a specific task or set of tasks. Functions are either built in, included in packages, or user-defined. Functions are used mainly to simplify running a series of individual commands or functions, for situations where the same process will need to be run multiple times on different inputs, or when control structures are needed (e.g., looping, logical branching).
 
-Data visualization is a powerful tool for understanding your data and teasing out relationships.  This lab will illustrate how to visualize the distribution of variables as well as associations between variables using base `R` and the `tidyverse` plotting package.
+### Function Components
 
-For this lab, we will use two important packages:
-- `dplyr` to manage and manipulate our data
-- `ggplot2` to actually produce the visualizations
+The different parts of a function are:
 
-To see all of the cool data visualization that you can do in R, visit the R Graph Gallery:
-https://www.r-graph-gallery.com/
+1.  (Usually) Name: This is the actual name of the function. It is stored in an R environment as an object with this name.
+2.  (Optional) Arguments: Arguments specify the inputs or options to the function. When a function is invoked, you pass a value to the argument. Arguments are optional; that is, a function may contain no arguments. Also arguments can have default values.
+3.  Body: The function body contains a collection of statements that defines what the function does.
+4.  Return value: The return value of a function is the last expression in the function body to be evaluated.
 
-```{r, warning = F, message = F}
-#install.packages("ggplot2")
-#install.packages('palmerpenguins')
-library(ggplot2)
-library(dplyr)
-library(palmerpenguins)
-```
+#### Name
 
-The data for this lab can be accessed through a package called `palmerpenguins`, which contains data on penguins' species, island, and body dimensions. This dataset will not actually appear in the global environment when you load the `palmerpenguins` library, but it is still accessible. 
+Most functions are created with code of the form
 
-We will start by examining some descriptive statistics for each variable using the `summary()` command.
-
-```{r iris}
-summary(penguins)
-```
-
-## Examining a single variable (univariate plots)
-
-Oftentimes, we want to know how our quantitative variable is distributed in the data.  Histograms provide handy way to do this.  In base `R`, we simply use the `hist()` command.  This is going to give us a very rough looking plot, but it's sufficient for exploratory data analysis (i.e. to get a sense of the typical case, whether and how the data is skewed).
-
-Note that the `echo = FALSE` parameter in the code chunk to prevent printing of the R code that generated the plot.
-
-### Histograms using base `R`
-
-```{r, echo=FALSE}
-hist(penguins$flipper_length_mm)
-```
-
-If we were inclined to present this graph to an audience, we would want to clean it up, including changing titles, axis labels, the size of the "bins", and the color of the bars. For a more extensive list of the colors that you can choose, visit the following website: https://www.nceas.ucsb.edu/sites/default/files/2020-04/colorPaletteCheatsheet.pdf
-
-```{r iris sepal, echo=FALSE, tidy =T}
-hist(penguins$flipper_length_mm,
-     main = "Histogram of Flipper Length (in mm)",   #main title of the graph
-     xlab = "Flipper Length",                #x-axis label (can also use ylab for y-axis label)
-     col = "purple4",                      #change color of the bars
-     breaks = 45)                          #alter the number of bins
-```
-
-**Question**
-What do you notice happened when we changed the bin width in the second histogram?  How might this be important to us as researchers?
-
-### Histograms in `ggplot2`
-
-We can also use `ggplot2` to plot this variable.  "gg" stands for "grammar of graphics"; the `ggplot2` package treats plots as an additive series of characteristics.  The first line generally indicates (a) what dataset you are using and (b) what variable(s) will go into the aesthetics.  Subsequent lines indicate the type of graph to be created (in this case, a histogram), different color attributes of the graph, axis titles and limits, et cetera.  
-
-The code in the first chunk is the simplest possible version of the histogram.
-
-```{r, warning = F, message = F, error = F}
-ggplot(penguins, aes(x = flipper_length_mm)) +
-  geom_histogram()
-```
-
-Again, it is not the most visually pleasing graph, but we can add features easily.
-
-```{r}
-ggplot(penguins, aes(x = flipper_length_mm)) +
-  geom_histogram(fill = "darkgoldenrod", #alter the fill color of the bars
-                 color = "white") +      #alter the outline color of the bars
-  ggtitle("Distribution of Flipper Length") +
-  xlab("Flipper Length") +
-  ylab("Frequency") +
-  theme_minimal()     #changes the background theme.  The default is grey.
-  
-```
-
-### Bar graphs in base `R`
-
-Sometimes we're interested in visualizing a **categorical** variable  In the case of the `penguins` dataset, 
-
-We'll first use base `R` and then `ggplot2` to create the bar plots. In base `R`, you must first convert your data into a table as we have done above.  
-
-```{r}
-#Summarize # of penguins from each 
-#island in a table
-counts <- table(penguins$island)
-
-#Create the plot
-barplot(counts) 
-```
-
-This plot tells you how many observations (a.k.a. penguins) originated from each island.
-
-We can add some bells and whistles to this plot in base `R` as well.
-
-```{r}
-barplot(counts, 
-        main = "Island of Origin",
-        col = "mediumpurple2",
-        ylab = "Frequency")
-```
-
-### Barplots in `ggplot2`
-In `ggplot2`, we will use the `geom_bar()` command. In `ggplot2`, we do not need to tabulate the data prior to plotting, which is handy. 
-
-```{r}
-ggplot(penguins, aes(x = island)) +
-  geom_bar(fill = "darkblue") +
-  xlab("Island of Origin") +
-  ylab("Frequency") +
-  theme_bw()    #note the difference in background with this theme
-```
-
-### Grouped bar plots in `ggplot2`
-
-What if we want to observe the relationship between two categorical variables?  In this case, we will examine the number of penguins of each species originating from each island. We can do so using a **grouped bar plot**. This is particularly straightforward to implement using `ggplot2`, but we will need to use `dplyr` to construct a summary tally of penguins by species and island and use that to make the graph.
-
-```{r}
-#Make a quick summary table of penguins
-#by island:
-species_by_island <- penguins %>%
-  group_by(species, island) %>%
-  tally()
-
-#Graph out the summary table using ggplot2:
-ggplot(species_by_island, aes(x = species, y = n, fill = island)) +
-  geom_bar(stat = "identity", position = "dodge") +
-  xlab("Island of Origin") +
-  ylab("Number of individuals of each species") +
-  theme_bw()    
-```
-
-We can also examine variable averages by group using a similar strategy as above.  This time, we'll look at average flipper length by island.  Again, we need to start by manipulating the data.
-
-```{r}
-#summarize average flipper length by island
-flippers_by_island <- penguins %>%
-  group_by(island) %>%
-  summarize(mean_flipper_length = mean(flipper_length_mm, na.rm = T))
-
-#graph it out:
-ggplot(flippers_by_island, aes(x = island, y = mean_flipper_length, fill = island)) +
-  geom_bar(stat = "identity", position = "dodge") +
-  xlab("Island of Origin") +
-  ylab("Frequency") +
-  theme_bw() + 
-  theme(legend.position = "none")  +  #use this last line to get rid of the legend 
-  scale_fill_manual(values = c("purple4", "darkgoldenrod", "black"))
-```
-
-## Scatterplots in base `R`
-
-To observe relationships between two numeric variables, we use scatterplots (also known as scattergrams).  Say we want to observe the relationship between a penguin's body mass (`body_mass_g`) and the length of its flippers (`flipper_length_mm`).
-
-```{r}
-plot(penguins$body_mass_g, penguins$flipper_length_mm,
-     xlab = "Body mass (in g)",
-     ylab = "Flipper Length (in mm)",
-     frame = FALSE, #removes the boundary that R automatically puts on a scatterplot
-     pch = 19)  #specifies the type of dot
-```
-
-
-```{r}
-plot(penguins$flipper_length_mm,
-     penguins$body_mass_g,
-     xlab = "Flipper length (mm)",
-     ylab = "Body Mass (g)",
-     main = "",
-     pch = 2, col = 'red')
-```
-
-### Saving directly to `.pdf`
-```{r pdf}
-pdf("WeightvsHeight.pdf",
-    height = 4, width = 4)
-plot(penguins$flipper_length_mm,
-     penguins$body_mass_g,
-     xlab = "Flipper length (mm)",
-     ylab = "Body Mass (g)",
-     main = "",
-     pch = 2, col = 'red')
-dev.off()
-```
-
-### Making custom plot limits
-
-```{r plot_lims}
-max(penguins$flipper_length_mm)
-max(penguins$flipper_length_mm, na.rm = TRUE)
-
-xlimits <- c(min(penguins$flipper_length_mm,
-                  na.rm = TRUE)-1,
-              max(penguins$flipper_length_mm,
-                  na.rm = TRUE)+1)
-ylimits <- c(min(penguins$body_mass_g,
-                  na.rm = TRUE)-1,
-              max(penguins$body_mass_g,
-                  na.rm = TRUE)+1)
-
-plot(penguins$flipper_length_mm[penguins$species == "Adelie"],
-     penguins$body_mass_g[penguins$species == "Adelie"],
-     xlim = xlimits,
-     ylim = ylimits,
-     xlab = "Flipper length (mm)",
-     ylab = "Body Mass (g)",
-     pch = 2, col = 'navyblue')
-points(penguins$flipper_length_mm[penguins$species == "Chinstrap"],
-       penguins$body_mass_g[penguins$species == "Chinstrap"],
-       pch = 19, col = 'deeppink',
-       lwd = 2)
-points(penguins$flipper_length_mm[penguins$species == "Gentoo"],
-       penguins$body_mass_g[penguins$species == "Gentoo"],
-       pch = 21, col = 'deepskyblue',
-       bg = alpha('deepskyblue', 0.5))
-legend('topleft', pch = c(2,19,19), 
-       lwd = c(1,2,1), lty = c(NA, NA,NA),
-       col = c("navyblue",
-               "deeppink",
-               alpha("deepskyblue",.5)),
-       legend = c("Adelie",
-                  "Chinstrap",
-                  "Gentoo"), bty = 'n')
-```
-
-### Multi-pane plots in base `R`
-
-```{r par_mfrow}
-par(mfrow = c(1,3))
-plot(penguins$flipper_length_mm[penguins$species == "Adelie"],
-     penguins$body_mass_g[penguins$species == "Adelie"],
-     xlim = xlimits,
-     ylim = ylimits,
-     xlab = "Flipper length (mm)",
-     ylab = "Body Mass (g)",
-     main = "Adelie",
-     pch = 19, col = 'navyblue')
-plot(penguins$flipper_length_mm[penguins$species == "Chinstrap"],
-     penguins$body_mass_g[penguins$species == "Chinstrap"],
-     xlim = xlimits,
-     ylim = ylimits,
-     xlab = "Flipper length (mm)",
-     ylab = "Body Mass (g)",
-     main = "Chinstrap",
-     pch = 19, col = 'deeppink')
-plot(penguins$flipper_length_mm[penguins$species == "Gentoo"],
-     penguins$body_mass_g[penguins$species == "Gentoo"],
-     xlim = xlimits,
-     ylim = ylimits,
-     xlab = "Flipper length (mm)",
-     ylab = "Body Mass (g)",
-     main = 'Gentoo',
-     pch = 19, col = 'deepskyblue')
-```
-
-### Multi-page pdf in base `R` with `for` loops
-
-```{r multi_pdf}
-titles <- c("Adelie", "Chinstrap", "Gentoo")
-colors <- c("navyblue", "deeppink", "deepskyblue")
-
-pdf('MassvsFlipper_species.pdf', height = 4, width = 4)
-for(i in 1:3){
-  par(mfrow = c(1,1))
-  plot(penguins$flipper_length_mm[penguins$species == titles[i]],
-     penguins$body_mass_g[penguins$species == titles[i]],
-     xlim = xlimits,
-     ylim = ylimits,
-     xlab = "Flipper length (mm)",
-     ylab = "Body Mass (g)",
-     main = titles[i],
-     pch = 2, col = colors[i])
+```         
+function_name <- function(argument(s)){
+    statement(s)
 }
-dev.off()
+```
+
+For example, to square a vector of numerical values:
+
+```{r}
+f_square <- function(x){
+    x^2
+}
+```
+
+the function name is `f_square`.
+#### Arguments
+
+Most functions require arguments. Arguments are used to instantiate variables within the function's environment that can be used later in the body of the function. Each argument is named, and the name is used within the function as a local variable within the function's environment.
+
+Following our example from above, `f_square` takes an argument named "x" that is a numeric vector.
+
+Here, let's modify the function to demonstrate that within the environment of the function, `x` is a variable by using `print(x)`:
+
+```{r}
+f_square_2 <- function(x){
+    message("input:")
+    print(x)
+    message("output:")
+    x^2
+}
+
+f_square_2(c(1,2,3))
+```
+
+##### The `...` argument
+
+When functions do not have a known *a priori* number or set of arguments, or when a large number of arguments is to be passed to another function the `...` argument is used. We will not cover this here, but you are encouraged to read more: [How to Use the Dots Argument in R](https://www.dummies.com/programming/r/how-to-use-the-dots-argument-in-r/); [The three-dots construct in R](https://www.r-bloggers.com/2013/01/the-three-dots-construct-in-r/).
+
+#### Body
+
+The function's body contains all of the code to perform the purpose of the function. Following our initial example, the body of the function is simply
+
+```{r eval=FALSE}         
+x^2
+```
+
+The body can be as simple or complicated as it needs to be in order to achieve the desired result.
+
+Here we run with the default option `verbose = FALSE`; only the final value `x^2` is in the output:
+
+```{r}
+f_square_3 <- function(x, verbose = FALSE){
+    # only run the next lines if verbose is true
+    if(verbose){
+        message("input:")
+        print(x)
+        message("output:")
+    }
+    x^2
+}
+
+f_square_3(x = c(1, 2, 3), verbose = FALSE)
+```
+
+... and with `verbose = TRUE`, additional text is printed :
+
+```{r}
+f_square_3(x = c(1, 2, 3), verbose = TRUE)
+```
+
+#### Return value
+
+The return value is either the last evaluated expression in the function or an object specified using the `return()` function. For functions that are intended to return only one value, by convention that is the last line in the function.
+
+In our original `f_square()` function, the return value is `x^2` since no other `return()` value was specified, e.g., for a vector of one element:
+
+```{r}
+f_square <- function(x){
+    x^2
+}
+f_square(3)
+```
+
+or a vector with multiple elements:
+
+```{r}
+f_square(c(1,2,3))
+```
+
+However, if it is possible that different outputs can be produced by a function based on some logical testing, one can explicitly use `return(object)` in the code; at that time the object will be output and the function will stop. A simple example of explicitly specifying return values is shown in this numerical comparison function:
+
+```{r}
+f_compare <- function(x, y){
+    # either missing?
+    if(nargs() != 2)
+        return("invalid number of arguments")
+    # numeric?
+    if(!is.numeric(x) | !is.numeric(y)){
+        return(sprintf("%s or %s is not numeric.", x, y))
+    }
+    # comparisons follow
+    if(x > y){
+        return(sprintf("%s is greater than %s", x, y))
+    } 
+    if(x < y) {
+        return(sprintf("%s is less than %s", x, y))
+    }
+    if(x == y){
+        return(sprintf("%s equals %s", x, y))
+    }
+}
+```
+
+Based on criteria such as the number of arguments or the relative value of the arguments `x` and `y`, different outputs are generated. Here are a few examples running the function:
+
+```{r}
+f_compare(1)
+
+f_compare(1, 2)
+
+f_compare(2, 1)
 ```
 
 
-## Scatterplots in `ggplot2`
+### Looping
 
-We also might want to add a regression line to our scatterplot. While you can certainly do this in base `R`, the `ggplot2` method is given below.
+Loops are run when you want to perform a series of tasks over and over on a set of objects.
 
-```{r ggplot_point, warning = F, message = F}
-ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
-  geom_point() +
-  xlab("Body Mass (in g)") +
-  ylab("Flipper length (in mm)") +
-  theme_classic() +
-  geom_smooth(method = lm, color = "red", se=FALSE) 
-#lm = linear model
-#se = whether or not to include standard error estimates
+#### Looping with `for()` loops
+
+A loop is constructed using the form ...
+
+```         
+for (element in set){
+    do something
+}
 ```
 
-### Grouped scatter plots
+where `element` represents the variable value of the current iteration and `set` is a group of objects, such as elements in a vector or list
 
-We can also observe how species might impact the relationship between body mass and flipper length using the grouping method. Here, we assign the dots of each species their own color.  You can also distinguish categories using different levels of shading, different shapes, or even different sizes of points (https://www.r-graph-gallery.com/274-map-a-variable-to-ggplot2-scatterplot.html).
+A few simple examples follow.
 
-```{r, warning = F, message = F}
-ggplot(penguins, aes(x=body_mass_g, y=flipper_length_mm, color=species)) + 
-    geom_point(size=6) +
-    theme_minimal() +
-  scale_color_manual(values = c("purple4", "darkgoldenrod", "black")) +
-  xlab("Body mass (in g)") + 
-  ylab("Flipper length (in mm)")
+Print each letter in the first 5 letters of the alphabet. In this example, the iterated element is a letter, and the variable `i` has the value of the letter in each iteration. The built in vector `letters` is used. So on the first iteration, `i = 1`, on the second iteration, `i = 2` and so on.
+
+```{r}
+for (i in head(letters, 5)){
+    print(i)
+}
 ```
 
-This plot gives us a new perspective on the data: we see that the relationship between body mass and flipper length is quite different for the Gentoo species, as compared with the Adelie and Chinstrap species.  
+In this example, the object `i` takes on integer values 1 through 10. Within the loop, a message is printed that includes the term `i^2`, which evaluates to `1^2`, `2^2`, $\dots$, `10^2`.
 
-
-
-### `facet_wrap`
-
-```{r, warning = F, message = F}
-penguins %>% 
-  ggplot(aes(x=body_mass_g, y=flipper_length_mm, color = species)) + 
-  geom_point(size=2) +
-  facet_wrap(~species) +
-  theme_minimal() +
-  guides(color = guide_legend(title = "Species")) +
-  xlab("Body mass (in g)") + 
-  ylab("Flipper length (in mm)")
+```{r}
+for(i in 1:10){
+    message(paste(i, "squared equals", i^2))
+}
 ```
 
-**Question** What do you think the code below does differently than the previous example?
-```{r, eval = FALSE, warning = F, message = F}
-penguins %>% 
-  ggplot(aes(x=body_mass_g, y=flipper_length_mm)) + 
-  geom_point(size=2) +
-  facet_wrap(~species) +
-  theme_classic() +
-  xlab("Body mass (in g)") + 
-  ylab("Flipper length (in mm)")
+Here is a similar approach, but using a numerical index referring to the position within a vector. The vector to be iterated over is `1:length(states_5)`, which evaluates to `r 1:length(head(state.name, 5))`. In each iteration, we print the index of the iterator and the state name.
+
+```{r}
+# take the first 5 state names
+states_5 <- head(state.name, 5)
+
+# iterate over those
+for (i in 1:length(states_5)){
+    s <- states_5[i]
+    message(paste0(i, ": ", s))
+}
 ```
-
-# Practice 2: Data manipulation \& Plotting
-
-  1. What is the mean bill height and depth in this dataset?
-  2. If 50mm is long, how many long-billed penguins are in the total dataset?
-  3. Create a new variable in the dataset to represent the ratio of bill length to depth.
-  4. Plot your new variable in a boxplot and change the color of the inside of the boxplot. HINT: see `?boxplot`.
 
