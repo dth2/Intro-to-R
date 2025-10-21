@@ -1,7 +1,7 @@
 ---
 title: "CSDE Workshop: Introduction to R"
 author: "Deven Hamilton"
-date: "October 17, 2023"
+date: "October 23, 2025"
 output: 
  html_document:
    toc: true
@@ -75,11 +75,11 @@ log(1000)
 exp(6.907755)   
 ```
 
-Note: \texttt{log()} computes the natural logarithm. See \texttt{?log} to compute a logarithm with a different base.\
+Note: {log()} computes the natural logarithm by default. See {?log} to compute a logarithm with a different base.\
 
 # Documentation
 
-One convenient feature in \texttt{R} is the documentation for all functions. If you want to learn more about a function and its arguments you can simply type a question mark in front of the function name or use the \texttt{help()} function.
+One convenient feature in {R} is the documentation for all functions. If you want to learn more about a function and its arguments you can simply type a question mark in front of the function name or use the {help()} function.
 
 ```{r, echo = T, eval = F}
 ?log
@@ -105,7 +105,8 @@ Notes:
 
 -   Object names are case-sensitive
 -   Object names should be meaningful and short (\`\`best practice'')
--   `<-` is most common, but `=` is acceptable
+-   Objects are assigned using an assignment operator
+    - `<-` is most common, but `=` is acceptable
 
 All R objects are given a class. The class of the object governs how it interacts with other objects.
 
@@ -128,7 +129,7 @@ Examples of `R` object types:
 -   function
 
 ## Data types
-The most atomic object in R will exist having one of those data types, described below. An atomic object of the data type can have a value, `NA` which represents an observation with no data (e.g., a missing measurement), or `NULL` which isn't really a value at all, but can still have the data type class.
+The most atomic object in R will exist having one of the data types (logical, numeric, integer, complex, character, raw). An atomic object of the data type can have a value, `NA` which represents an observation with no data (e.g., a missing measurement), or `NULL` which isn't really a value at all, but can still have the data type class.
 
 You will encounter other data types, such as `Date` or `POSIXct` if you are working with dates or time stamps. These other data types are extensions of the fundamental data types.
 
@@ -150,7 +151,7 @@ print(class(n))
 
 ### Logical
 
-Use `logical` values for characteristics that are either `TRUE` or `FALSE`. Note that if `logical` elements can also have an `NA` value if the observation is missing. In the following examples,
+Use `logical` values for characteristics that are either `TRUE` or `FALSE`. Note that `logical` elements can also have an `NA` value if the observation is missing. In the following examples,
 
 ```{r}
 # evaluate as logical, test whether 1 is greater than two
@@ -163,8 +164,8 @@ age_john <- 39
 age_jane <- NA
 
 # logical NA from Jane's undefined age
-(jo <- age_john > 50)
-(ja <- age_jane > 50)
+age_john > 50
+age_jane > 50
 ```
 
 Logical values are often expressed in binary format as 0 = `FALSE` and 1 =`TRUE\`. In R these values are interconvertible. Other software (e.g., Excel, MS Access) may convert logical values to numbers that you do not expect.
@@ -344,7 +345,7 @@ v <- seq(from = 0, to = 10, by = 2)
 v[4]
 ```
 
-The index number can extracted based on a specific criteria and used to designate elements in the vector you want to change
+The index number can be extracted based on a specific criteria and used to designate elements in the vector you want to change
 
 ```{r}
 v <- seq(from = 0, to = 10, by = 2)
