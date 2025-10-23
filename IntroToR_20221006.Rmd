@@ -40,14 +40,38 @@ Rstudio has four main panels that allow you to organize your code and have a bet
 
 ![](C:/Users/Deven Hamilton/My Drive/CSDE/workshops/images/Rstudiolayout.png)
 
-# R as a calculator
+# R Packages
 
-Open a new .R script by clicking File $\rightarrow$ New File $\rightarrow$ R Script. We can execute code by highlighting it in a source file and clicking the run button.\
+R is open source software meaning that anyone can contribute to the development of the software. Contributors can submit R packages to CRAN, upload them to public repositories like github, or host them on their own systems. An R package is a collection of R functions, data, and documentation that extends the functionality of the R statistical programming language for a specific task. 
+
+We are going to download some useful R packages that we will use later in the course. 
+
+- Go to the tools drop down menu and select "install packages". 
+
+- In the pop-up window make sure that the "Install dependencies" box in checked. 
+
+- Type "tidyverse" in the packages field and click install.
+
+- In the console window type library(tidyverse) to load the tidyverse package in to your working environment. 
+
+You will use the same procedure to load any packages you may want to use in the future for sample weighting, Bayesian statistics, spacial analysis, network modeling etc.
+
+Now open a new .R script by clicking File $\rightarrow$ New File $\rightarrow$ R Script.\ 
+
+
 ![](C:/Users/Deven Hamilton/My Drive/CSDE/workshops/images/script.png)
 
-We can also execute code by typing it directly into the console and pressing enter. 
+# R as a calculator
+
+We can execute code by typing it directly into the console and pressing enter. 
 
 ![](C:/Users/Deven Hamilton/My Drive/CSDE/workshops/images/Console.png)
+
+We can also execute code by highlighting it in a source file and clicking the run button. Try entering 2+3 in the R script, highlighting it, and running it.
+
+```{r, eval = T, echo = T}
+2+3
+```
 
 We can do basic mathematical computations using +,-, \*, /, and ().\
 
@@ -64,6 +88,22 @@ pi*1
 
 Try some on your own!\
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 What about more complicated functions like exponents, square roots, trig functions and the natural logarithm?\
 
 ```{r, echo = T, eval = T}
@@ -75,11 +115,11 @@ log(1000)
 exp(6.907755)   
 ```
 
-Note: {log()} computes the natural logarithm by default. See {?log} to compute a logarithm with a different base.\
+Note: {log()} computes the natural logarithm by default. 
 
 # Documentation
 
-One convenient feature in {R} is the documentation for all functions. If you want to learn more about a function and its arguments you can simply type a question mark in front of the function name or use the {help()} function.
+One convenient feature in {R} is the documentation for all functions. If you want to learn more about a function and its arguments you can simply type a question mark in front of the function name or use the {help()} function. See {?log} to compute a logarithm with a different base.\
 
 ```{r, echo = T, eval = F}
 ?log
@@ -177,11 +217,11 @@ Logical values are often expressed in binary format as 0 = `FALSE` and 1 =`TRUE\
 
 ### Numeric
 
-`Numeric` values are numbers with range about 2e-308 to 2e+308, depending on the computer you are using. You can see the possible range by entering `.Machine` at the R console. These can also include decimals. For more information, see [Double-precision floating-point format](https://en.wikipedia.org/wiki/Double-precision_floating-point_format)
+`Numeric` values are numbers with range about 2e-308 to 2e+308, depending on the computer you are using. You can see the possible range by entering `.Machine` in the R console. These can also include decimals. For more information, see [Double-precision floating-point format](https://en.wikipedia.org/wiki/Double-precision_floating-point_format)
 
 ### Integer
 
-`Integer` values are numerical, but can only take on whole, rather than fractional values, and have a truncated range compared to `numeric`. For example, see below, if we try to create an integer that is out of range. The object we created is an integer, but because it is out of range, is value is set to `NA`.
+`Integer` values are numerical, but can only take on whole, rather than fractional values, and have a truncated range compared to `numeric`. For example, if we try to create an integer that is out of range, see below, the object we created is an integer, but because it is out of range, is value is set to `NA`.
 
 ```{r}
 i <- as.integer(999999999999999999999)
@@ -230,6 +270,9 @@ print(charToRaw("z"))
 class(charToRaw("z"))
 ```
 
+### Factor
+The `factor` data type is not a core data type but it is very important in social science research and it is closely related to the vector data structure described below  
+
 ## R data structures {#rdatastructures}
 
 There are 5 basic data structures in R, as shown in the graphic:
@@ -243,7 +286,7 @@ There are 5 basic data structures in R, as shown in the graphic:
 ![](C:/Users/Deven Hamilton/My Drive/CSDE/workshops/images/data_structures.png)
 
 
-In addition, the `factor` data type is very important
+
 
 ### Vector
 
@@ -260,7 +303,7 @@ is(a)
 We can create a vector with repeated numbers.
 
 ```{r}
-help(rep)
+# see help(rep)
 
 z <- rep(1,5)
 z
@@ -277,7 +320,7 @@ t
 We can create a vector with a sequence of numbers.
 
 ```{r}
-help(seq)
+# see help(seq)
 
 a <- 1:5
 a
@@ -298,13 +341,16 @@ e
 If you try creating a vector with mixed data types, you may get unexpected results; mixing character elements with other type elements will result in character representations, e.g.,
 
 ```{r}
-c(1, "a", TRUE, charToRaw("z"))
+(v <- c(1, "a", TRUE, charToRaw("z")))
+class(v)
+
 ```
 
 Results will depend on the data type you are mixing, for example because logical values can be expressed numerically, the `TRUE` and `FALSE` values are converted to `1` and `0`, respectively.
 
 ```{r}
-(c(1:3, TRUE, FALSE))
+(v <- (c(1:3, TRUE, FALSE)))
+class(v)
 ```
 
 But if a character is added, all elements are converted to characters.
@@ -330,7 +376,7 @@ You can get some information about vectors, such as length and data type:
 
 ```{r}
 # create a random normal 
-set.seed(5)
+set.seed(5)  #setting the seed allows for comparable results from random processes
 normvec100 <- rnorm(n = 100)
 
 length(normvec100)
@@ -347,13 +393,15 @@ v[4]
 
 The index number can be extracted based on a specific criteria and used to designate elements in the vector you want to change
 
+The which function selects the indexes of elements for which a conditional is TRUE 
+
 ```{r}
 v <- seq(from = 0, to = 10, by = 2)
 v
 
-which(v > 5)
+which(v > 5) # note that the () indicate an operation 
 
-v[which(v > 5)] <- 100
+v[which(v > 5)] <- 100 # note that the [] indicate an index 
 v
 
 ```
@@ -382,6 +430,8 @@ A matrix is like a vector, in that it can contain only one data type, but it is 
 
 If you try to force a vector into a matrix whose row $\times$ col length does not match the length of the vector, the elements will be recycled, which may not be what you want. At least R will give you a warning.
 
+Note: letters is a pre-loaded vector of the alphabet
+
 ```{r}
 (m3 <- matrix(letters, ncol = 10, nrow = 10))
 ```
@@ -405,7 +455,7 @@ dim(matrix.zero)
 
 #### Subsetting a matrix
 
-To isolate or look at parts of a matrix we will still use brackets [ ], but now we have two dimensions.
+To isolate or look at parts of a matrix we will still use brackets `[ ]`, but now we have two dimensions.
 
 ```{r,}
 z <- 1:30
@@ -441,9 +491,9 @@ matrix.z[1, 4] = 999
 matrix.z
 ```
 
-We can also create a new matrix by combining columns or rows from a pre-existing matrix. The command cbind combines columns, and the command rbind combines rows.\
+We can also create a new matrix by combining columns or rows from a pre-existing matrix. The command `cbind` combines columns, and the command `rbind` combines rows.\
 
-Note: You need to have the same number of columns to use cbind, and rows to use rbind.
+Note: You need to have the same number of rows to use `cbind`, and columns to use `rbind`.
 
 ```{r}
 
@@ -490,7 +540,7 @@ matrix.a + matrix.b
 
 #### Matrix multiplication
 
-To multiply matrices we need the left matrix to have the same number of columns as the number of rows in the right matrix. Instead of \* we use %\*% to multiply matrices.\
+To multiply matrices we need the left matrix to have the same number of columns as the number of rows in the right matrix. Instead of `*` we use `%*%` to multiply matrices.\
 
 Take note of what happens when we try to do the following operations:
 
@@ -511,9 +561,10 @@ dim(matrix.d)
 
 ```{r, eval = F}
 
+matrix.d %*% matrix.c
+
 matrix.c %*% matrix.d 
 
-matrix.d %*% matrix.c
 ```
 
 ##### Practice 1: Vectors & Matrices
@@ -526,7 +577,7 @@ matrix.d %*% matrix.c
 
 ### Array
 
-An array is similar to matrix, but it can have more than one dimension. These can be useful for analyzing time series data or other multidimensional data. A simple example of creating and viewing the contents of an array:
+An array is similar to a matrix, but it can have more than two dimensions. These can be useful for analyzing time series data or other multidimensional data. A simple example of creating and viewing the contents of an array:
 
 ```{r}
 # a vector 1 to 27
@@ -541,15 +592,15 @@ v <- 1:27
 
 ### List
 
-R lists are ordered collections of objects that do not need to be of the same data type. Those objects can be single-value vectors, multiple-value vectors, matrices, data frames, other lists, etc. Because of this, lists are a very flexible data type. But because they can have as little or as much structure as you want, can become difficult to manage and analyze.
+R lists are ordered collections of objects that do not need to be of the same data type. Those objects can be single-value vectors, multiple-value vectors, matrices, data frames, other lists, etc. Because of this, lists are a very flexible data type. But because they can have as little or as much structure as you want, they can become difficult to manage and analyze.
 
-Here is an example of a list comprised of single value vectors of different data type. Compare this with the attempt to make a vector comprised of elements of different data type:
+Here is an example of a list comprised of single value vectors of different data types. Compare this with the attempt to make a vector comprised of elements of different data types:
 
 ```{r}
 (l <- list("a", 1, TRUE))
 ```
 
-Let's modify that list a bit:
+Let's modify that list a bit and an vectors with length > 1:
 
 ```{r}
 (l <- list("a", 
@@ -566,7 +617,8 @@ To perform operations on all elements of a list, use `lapply()`:
 (lapply(X = l, FUN = class))
 
 # mean, maybe?
-(lapply(X = l, FUN = function(x) {mean(x)}))
+
+(lapply(X = l, FUN = mean))
 ```
 
 ### Factor
@@ -628,13 +680,13 @@ print(BMI)
 ```
 ## The environment
 
-The function \texttt{ls()} will list all of the objects that have been created:
+The function `ls()` will list all of the objects that have been created:
 
 ```{r, echo = T, eval = T}
 ls()
 ```
 
-Here we see we have in our environment the objects we created \texttt{x, y, h}. If we assign a new value to \texttt{x} it will overwrite what is already stored in that object
+Here we see we have in our environment the objects we created {x, y, h}. If we assign a new value to {x} it will overwrite what is already stored in that object
 
 ```{r}
 x     #Original object that we created above.
@@ -651,14 +703,14 @@ rm(list=ls())
 
 # Data Manipulation
 
-Like we did with vectors and matrices, we may want to select or view partial data frames.
+Like we did with vectors and matrices, we may want to select, view, or summarize partial data frames.
 
 Whether you go down the base `R` or `tidyr`/`dplyr` path is up to you, but I want you to have some familiarity with both.
 
 -   Vignette base `R` vs `tidyverse`: \url{https://tavareshugo.github.io/data_carpentry_extras/base-r_tidyverse_equivalents/base-r_tidyverse_equivalents.html}
 -   `tidyr`, `dplyr` cheat sheet: <https://rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf>
 
-The most common dplyr functions:
+The most common dplyr (tidyverse) functions:
 
  - select(): subset columns
  - filter(): subset rows on conditions
@@ -676,7 +728,7 @@ summary(penguins)
 
 ### Selecting variables
 
-In base `R`, we select a column in one of two ways
+In base `R`, we select a column in one of two ways `$` or row by column index `[]`
 
 ```{r, echo = T, eval = F}
 penguins$species
@@ -710,8 +762,10 @@ dim(Gentoo.tidy)
 head(Gentoo.tidy)
 ```
 
-We can also use what is called \`\`the pipeline'' to do the same operation.
-The piple can be read as "and then"
+We can also use what is called "the pipeline'' to do the same operation.
+The pipeline can be read as "and then"
+
+The piping operator, `%>%`, passes the result of one expression as an argument to the next function, allowing for a clean, readable chain of operations. It evaluates the expression on the left and feeds its output to the function on the right, simplifying code that would otherwise require nested functions or intermediate variables
 
 
 ```{r, echo = T, eval = F}
@@ -734,8 +788,10 @@ penguins %>% filter(species == "Gentoo" ) %>%
 
 ```{r, echo = T, eval = T}
 
-head(penguins)
+dim(penguins)
 penguins$bill_length_cm <- penguins$bill_length_mm * 10
+dim(penguins)
+head(penguins)
 ```
 
 ```{r, echo = T, eval = F}
@@ -771,7 +827,7 @@ quantile(penguins$bill_depth_cm,0.75, na.rm = TRUE)
 quantile(penguins$bill_depth_cm,c(0.25,0.5,0.75), na.rm = TRUE)
 ```
 
-You can also use the tidyverse to selects collections of summary statistics.
+You can also use base R or the tidyverse to selects collections of summary statistics.
 
 ```{r, echo = T, eval = T}
 P.base <- data.frame(BillMean = mean(penguins$bill_length_mm,na.rm=TRUE),
@@ -801,10 +857,12 @@ P.dplyr
 
 ### Summary statistics by group
 
-In many cases it's inconsequential whether you use base `R` or the `tidyverse`. Often `tidyr` and `dplyr` functions are a bit faster than `R`, but I find the `summarise`function in the `tidyverse` to be MUCH, MUCH slower than `aggregate` in base `R`.
+In many cases it's inconsequential whether you use base `R` or the `tidyverse`. Often `tidyr` and `dplyr` functions are a bit faster than `R`, but I find the `summarise`function in the `tidyverse` to be MUCH, MUCH slower than `aggregate` in base `R`. Let's take a look using the "mtcars" data set.
 
 ```{r, echo = T, eval = T}
 data(mtcars)
+names(mtcars)
+
 mtcars.sum.by <- aggregate(x = cbind(mpg, wt) ~ cyl + gear, 
           data = mtcars, 
           FUN = function(x){
@@ -818,9 +876,10 @@ mtcars.sum.by2 <- aggregate(x = total ~ cyl + gear,
           data = mtcars, 
           FUN = sum, drop = T)
 mtcars.sum.by2
-table(mtcars$cyl, mtcars$gear)
+
 
 ```
+Using dplyr/ Hadlyverse "summarise" 
 
 ```{r, echo = T, eval = F}
 mtcars.sum.dplyr <- mtcars %>% 
@@ -854,7 +913,6 @@ The different parts of a function are:
 3.  Body: The function body contains a collection of statements that defines what the function does.
 4.  Return value: The return value of a function is the last expression in the function body to be evaluated.
 
-#### Name
 
 Most functions are created with code of the form
 
@@ -872,14 +930,23 @@ f_square <- function(x){
 }
 ```
 
-the function name is `f_square`.
+#### Name
+
+The function name is `f_square`.
+
 #### Arguments
 
 Most functions require arguments. Arguments are used to instantiate variables within the function's environment that can be used later in the body of the function. Each argument is named, and the name is used within the function as a local variable within the function's environment.
 
 Following our example from above, `f_square` takes an argument named "x" that is a numeric vector.
 
-Here, let's modify the function to demonstrate that within the environment of the function, `x` is a variable by using `print(x)`:
+```{r}
+f_square(6)
+f_square(c(1,2,3))
+
+```
+
+We can modify the function to demonstrate that within the environment of the function, `x` is a variable by using `print(x)`:
 
 ```{r}
 f_square_2 <- function(x){
@@ -906,7 +973,9 @@ x^2
 
 The body can be as simple or complicated as it needs to be in order to achieve the desired result.
 
-Here we run with the default option `verbose = FALSE`; only the final value `x^2` is in the output:
+Here we add an argument to the function that controls a conditional in the body 
+
+First run with the default option `verbose = FALSE`; only the final value `x^2` is in the output:
 
 ```{r}
 f_square_3 <- function(x, verbose = FALSE){
@@ -980,11 +1049,16 @@ f_compare(1, 2)
 
 f_compare(2, 1)
 ```
+It is common for complex functions to use a series of checks before executing the intended computation or task
 
+```{r}
+glm
+```
 
 ### Looping
 
 Loops are run when you want to perform a series of tasks over and over on a set of objects.
+
 
 #### Looping with `for()` loops
 
@@ -1000,7 +1074,7 @@ where `element` represents the variable value of the current iteration and `set`
 
 A few simple examples follow.
 
-Print each letter in the first 5 letters of the alphabet. In this example, the iterated element is a letter, and the variable `i` has the value of the letter in each iteration. The built in vector `letters` is used. So on the first iteration, `i = 1`, on the second iteration, `i = 2` and so on.
+Print each letter in the first 5 letters of the alphabet. In this example, the iterated element is a letter, and the variable `i` has the value of the letter in each iteration. The built in vector `letters` is used. So on the first iteration, `i = 1`, on the second iteration, `i = 2` and so on. The `head(x,y)` function selects the first y elements of a vector x.
 
 ```{r}
 for (i in head(letters, 5)){
@@ -1029,3 +1103,38 @@ for (i in 1:length(states_5)){
 }
 ```
 
+#### Looping with `while()` loops
+
+A while loop is constructed using the form ...
+
+```         
+while (condition is met){
+    do something
+}
+```
+
+where `condition` represents a logical test or expression and the `condition is met` when the Boolean test returns the value `TRUE`.
+
+Let's print out numbers of the Fibonacci sequence below 100. The Fibonacci sequence begins with the numbers 1, 1, and then every term after that is the sum of the two terms before it. Formally, 
+
+$$a_1 = 1$$
+$$a_2 = 1$$
+$$a_n = a_{n-1} + a_{n-2}$$
+
+
+```{r while}
+## Create vector with two initial terms.
+sequence <- c(1, 1)
+
+print(sequence[1])
+print(sequence)
+while(sequence[length(sequence)] +
+          sequence[length(sequence) - 1] < 100){
+  term_no <- length(sequence) + 1
+  
+  sequence <- c(sequence,
+                sequence[term_no - 1] + sequence[term_no - 2])
+  print(sequence)
+}
+
+``` 
